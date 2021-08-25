@@ -1,0 +1,3 @@
+rootProject.name = 'lucky-finder'
+include 'core'
+include 'frontend'
