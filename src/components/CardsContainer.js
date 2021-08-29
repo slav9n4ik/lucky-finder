@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {useSelector} from "react-redux";
 import ErrorDialog from "./ErrorDialog";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -22,46 +23,48 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     cardMedia: {
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '70.25%', // 16:9
     },
     cardContent: {
         flexGrow: 1,
     }
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function CardsContainer() {
     const classes = useStyles();
     const currentProfiles = useSelector(state => state.currentProfiles);
     const initData = useSelector(state => state.initData);
 
-    console.log("currentProfiles: ", currentProfiles)
     return(
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
-                {cards.map((card) => (
-                    <Grid item key={card} xs={12} sm={6} md={4}>
+                {currentProfiles && currentProfiles.data.profiles.map((card) => (
+                    <Grid item key={card.id} xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
+                                image={card.photos[0].url}
+                                title={card.first_name + " " + card.last_name}
                             />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Heading
+                                    {card.first_name + " " + card.last_name}
                                 </Typography>
-                                <Typography>
-                                    This is a media card. You can use this section to describe the content.
-                                </Typography>
+                                {card.instagram && <Typography>
+                                    Instagram: {"  "}
+                                    <Link href={"https://www.instagram.com/" + card.instagram}>
+                                        <b>{card.instagram}</b>
+                                    </Link>
+                                </Typography>}
                             </CardContent>
                             <CardActions>
                                 <Button size="small" color="primary">
-                                    View
+                                    <Link href={"https://vk.com/id" + card.id}>
+                                        В профиль
+                                    </Link>
                                 </Button>
                                 <Button size="small" color="primary">
-                                    Edit
+                                    Cкачать фотки
                                 </Button>
                             </CardActions>
                         </Card>

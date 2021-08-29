@@ -15,6 +15,7 @@ import ru.lucky.finder.frontend.template.TemplateParser;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,7 +45,10 @@ public class VkServiceImpl implements VkService {
     @Override
     public ProfileListDto getProfileWithFilters(ProfileFilters filters) {
         if (buffer.size() == 0) initSearchData(filters);
-        var result = new ArrayList<>(buffer);
+        List<ProfileDto> result = new ArrayList<>(buffer);
+        if (filters.getInstagram()) result.removeIf(dto -> dto.getInstagram() == null);
+        if (filters.getRelation()) result.removeIf(dto -> dto.getRelation() == null);
+        if (filters.getRelatives()) result.removeIf(dto -> dto.getRelatives() == null || dto.getRelatives().isEmpty());
         return new ProfileListDto(result.size(), result);
     }
 
@@ -88,7 +92,7 @@ public class VkServiceImpl implements VkService {
     private void resultProcessing() {
        buffer = buffer.stream()
                .distinct()
-               .filter(profile -> !profile.getIsClosed() && profile.getCanAccessClosed())
+               .filter(profile -> !profile.getIsClosed() && profile.getCanAccessClosed() && profile.getHasPhoto() >= 1)
                .collect(Collectors.toCollection(ConcurrentLinkedQueue::new));
        total.set(buffer.size());
     }

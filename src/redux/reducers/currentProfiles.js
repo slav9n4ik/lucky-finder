@@ -2,7 +2,10 @@ import React from "react";
 import {REQUEST_PROFILES_SUCCESS, REQUEST_PROFILES_FAIL, REQUESTING_PROFILES} from "../actions/actionTypes";
 
 const initialState = {
-    data: {},
+    data: {
+        profiles: [],
+        total: 0
+    },
     request: {},
     loading: true,
     error: false,

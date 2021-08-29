@@ -23,6 +23,10 @@ public class ProfileDto {
     private Integer relation;
     @JsonProperty("counters")
     private Counters counters;
+    @JsonProperty("has_photo")
+    private Integer hasPhoto;
+    @JsonProperty("photos")
+    private List<Photos> photos;
     @JsonProperty("relation_partner")
     private RelationPartner relationPartner;
     @JsonProperty("relatives")

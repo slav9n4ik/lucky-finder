@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 export default function CircularProgressWithLabel(props) {
-    console.log(props.value)
     return (
         <Box position="relative" display="inline-flex">
             <CircularProgress variant="determinate" {...props} />

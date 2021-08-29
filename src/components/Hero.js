@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
 import {Checkbox, FormControlLabel, MenuItem, TextField} from "@material-ui/core";
 import CircularProgressWithLabel from "./CircularProgressWithLabel";
+import {Label} from "@material-ui/icons";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -54,6 +56,7 @@ const sort = [
 
 export default function Hero({filters, searchHandler, initSearchHandler, progress}) {
     const classes = useStyles();
+    const currentProfiles = useSelector(state => state.currentProfiles);
     const [currentFilter, setCurrentFilter] = useState(null);
 
     useEffect(() => {
@@ -73,7 +76,6 @@ export default function Hero({filters, searchHandler, initSearchHandler, progres
     function setFilter(name, value) {
         let newFilters = {...currentFilter};
         newFilters[name] = value;
-        console.log("currentFilter: ", currentFilter)
         setCurrentFilter(newFilters);
     }
 
@@ -112,8 +114,8 @@ export default function Hero({filters, searchHandler, initSearchHandler, progres
                                     onChange={(event) => filterHandler(event)}
                                 />
                                 <TextField
-                                    id="birthDay"
-                                    name="birthDay"
+                                    id="birthMonth"
+                                    name="birthMonth"
                                     label="Месяц рождения"
                                     type="number"
                                     InputLabelProps={{
@@ -185,13 +187,24 @@ export default function Hero({filters, searchHandler, initSearchHandler, progres
                                 <FormControlLabel
                                     control={
                                         <Checkbox
-                                            checked={currentFilter.instagram}
+                                            checked={currentFilter.relation}
                                             onChange={(event) => filterCheckedHandler(event)}
-                                            name="instagram"
+                                            name="relation"
                                             color="primary"
                                         />
                                     }
-                                    label="Больше 20 фото"
+                                    label="Указана ссылка о семейном положении"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={currentFilter.relatives}
+                                            onChange={(event) => filterCheckedHandler(event)}
+                                            name="relatives"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Указаны родственники"
                                 />
                             </div>
                         </form>
@@ -206,7 +219,9 @@ export default function Hero({filters, searchHandler, initSearchHandler, progres
                         </Button>
                     </Grid>
                     <Grid item>
-                        <CircularProgressWithLabel value={progress} />
+                        <label>
+                            Найдено: {currentProfiles.data.total}
+                        </label>
                     </Grid>
                 </Grid>
             </Container>

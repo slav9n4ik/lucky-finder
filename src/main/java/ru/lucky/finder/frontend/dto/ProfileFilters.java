@@ -14,7 +14,8 @@ public class ProfileFilters {
     private String canAccessClosed;
     private Integer count;
     private Boolean instagram;
-    private Boolean morePhotos;
+    private Boolean relation;
+    private Boolean relatives;
     private String birthDay;
     private String birthMonth;
     private Integer offset;

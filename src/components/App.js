@@ -22,12 +22,13 @@ export default function App() {
                     sort: 0,
                     offset: 0,
                     instagram: true,
-                    morePhotos: true,
+                    relation: true,
+            relatives: false,
                     count: 950,
                     birthDay: 31,
                     birthMonth: 8,
                     searchFields: ['lists'],
-                    getUserFields: ['counters', 'relatives', 'relation', 'connections', 'exports']
+                    getUserFields: ['counters', 'relatives', 'relation', 'connections', 'exports', 'has_photo', 'photo_200_orig']
                 }
     );
 
