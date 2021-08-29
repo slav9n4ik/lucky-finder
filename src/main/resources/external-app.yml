@@ -1,0 +1,20 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          vk:
+            clientId: '************'
+            clientSecret: '************'
+            redirectUri: 'http://localhost:8080/auth-vk'
+            authorizationGrantType: authorization_code
+        provider:
+          vk:
+            tokenUri: https://oauth.vk.com/access_token
+            authorizationUri: https://oauth.vk.com/authorize
+            tokenName: code
+            authenticationScheme: query
+            clientAuthenticationScheme: form
+            usersGetUrl: https://api.vk.com/method/users.get
+            scope: email
+            version: 5.131

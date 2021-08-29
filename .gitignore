@@ -24,8 +24,6 @@ hs_err_pid*
 
 .idea
 .gradle
-./core/.gradle
-./core/build
 
-./frontend/node_modules
-./frontend/package-lock.json
+.node_modules
+.package-lock.json
