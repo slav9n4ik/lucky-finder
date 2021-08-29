@@ -16,7 +16,7 @@ public class VkProvider {
     private String tokenName;
     private String authenticationScheme;
     private String clientAuthenticationScheme;
-    private String usersGetUrl;
+    private String vkUrl;
     private String scope;
     private String version;
 }

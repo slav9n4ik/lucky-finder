@@ -1,15 +1,12 @@
 package ru.lucky.finder.frontend.service.impl;
 
-import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
-import com.nimbusds.jose.shaded.json.JSONValue;
 import com.nimbusds.jose.shaded.json.parser.JSONParser;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -48,8 +45,7 @@ public class AuthServiceImpl implements AuthService {
     public void auth(String code) {
         String responseUrl = getAuthResponseURL(code);
         Map<String, String> userData = getUserData(responseUrl);
-        userData = getUserData(userData);
-        log.info("userData: {}", userData);
+        log.info("userData1: {}", userData);
         login(userData);
     }
 
@@ -81,28 +77,6 @@ public class AuthServiceImpl implements AuthService {
         userData.put("access_token", (String) jsonObject.get("access_token"));
         userData.put("user_id", jsonObject.get("user_id").toString());
         userData.put("email", (String) jsonObject.get("email"));
-        return userData;
-    }
-
-    private Map<String, String> getUserData(Map<String, String> userData) {
-        String request = provider.getUsersGetUrl() + "?"
-                + "users_ids=" + userData.get("user_id")
-                + "&v=" + provider.getVersion()
-                + "&access_token=" + userData.get("access_token");
-
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(request, String.class);
-        JSONObject jo = null;
-        try {
-            jo = (JSONObject) JSONValue.parseWithException(responseEntity.getBody());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        JSONArray jsonArray = (JSONArray) jo.get("response");
-        JSONObject dataArray = (JSONObject) jsonArray.get(0);
-        userData.put("first_name", (String) dataArray.get("first_name"));
-        userData.put("last_name", (String) dataArray.get("last_name"));
-        userData.put("avatar_link", (String) dataArray.get("photo_100"));
         return userData;
     }
 }

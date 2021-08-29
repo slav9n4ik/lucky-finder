@@ -33,6 +33,7 @@ build.dependsOn(npmBuild)
 
 dependencies {
     implementation 'org.projectlombok:lombok',
+            'org.springframework.boot:spring-boot-starter-freemarker',
             'org.postgresql:postgresql',
             'org.webjars:jquery:3.4.1',
             'org.webjars:bootstrap:4.3.1',

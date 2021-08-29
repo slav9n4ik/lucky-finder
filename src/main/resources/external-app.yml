@@ -15,6 +15,6 @@ spring:
             tokenName: code
             authenticationScheme: query
             clientAuthenticationScheme: form
-            usersGetUrl: https://api.vk.com/method/users.get
+            vkUrl: https://api.vk.com/method
             scope: email
             version: 5.131
