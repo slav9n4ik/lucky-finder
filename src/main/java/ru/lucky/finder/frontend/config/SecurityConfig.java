@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/js/main.js", "/error", "/webjars/**", "/auth-vk")
+                        .antMatchers("/js/main.js.map", "/js/main.js", "/error", "/webjars/**", "/auth-vk")
                         .permitAll()
                         .anyRequest()
                         .authenticated()

@@ -33,8 +33,8 @@ public class VkServiceImpl implements VkService {
     private final VkProvider provider;
     private final TemplateParser templateParser;
 
-    ConcurrentLinkedQueue<ProfileDto> buffer = new ConcurrentLinkedQueue<>();
-    private AtomicInteger total = new AtomicInteger(0);
+    private ConcurrentLinkedQueue<ProfileDto> buffer = new ConcurrentLinkedQueue<>();
+    private final AtomicInteger total = new AtomicInteger(0);
 
     @Override
     public String initSearchData(ProfileFilters filters) {
@@ -119,7 +119,8 @@ public class VkServiceImpl implements VkService {
     }
 
     private String generateCodeQueryForGetProfilesByFilters(ProfileFilters filters) {
-        Map<String, Object> params = Map.of(
+        return templateParser.prepareQuery("search/SearchAndGetProfiles.js.ftl",
+                Map.of(
                 "sex", filters.getSex(),
                 "status", filters.getStatus(),
                 "sort", filters.getSort(),
@@ -130,9 +131,8 @@ public class VkServiceImpl implements VkService {
                 "birth_month", filters.getBirthMonth(),
                 "searchFields", join(",", filters.getSearchFields()),
                 "getUserFields", join(",", filters.getGetUserFields())
+                )
         );
-        String query = templateParser.prepareQuery("search/SearchAndGetProfiles.js.ftl", params);
-        return query;
     }
 
     private HttpHeaders buildHeaderWithToken() {

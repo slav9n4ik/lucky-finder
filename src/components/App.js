@@ -1,9 +1,9 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Footer from "./Footer";
-import Bar from "./Bar";
-import Hero from "./Hero";
-import CardsContainer from "./CardsContainer";
+import Footer from "./footer/Footer";
+import Bar from "./bar/Bar";
+import Hero from "./hero/Hero";
+import CardsContainer from "./cards/CardsContainer";
 import {useDispatch} from "react-redux";
 import {fetchCurrentProfiles} from "../redux/requests/fetchCurrentProfiles";
 import {fetchInitData} from "../redux/requests/fetchInitData";
@@ -23,7 +23,7 @@ export default function App() {
                     offset: 0,
                     instagram: true,
                     relation: true,
-            relatives: false,
+                    relatives: false,
                     count: 950,
                     birthDay: 31,
                     birthMonth: 8,

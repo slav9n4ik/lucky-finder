@@ -9,7 +9,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {useSelector} from "react-redux";
-import ErrorDialog from "./ErrorDialog";
+import ErrorDialog from "../common/ErrorDialog";
 import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,14 +52,18 @@ export default function CardsContainer() {
                                 </Typography>
                                 {card.instagram && <Typography>
                                     Instagram: {"  "}
-                                    <Link href={"https://www.instagram.com/" + card.instagram}>
+                                    <Link rel="noopener"
+                                          target="_blank"
+                                          href={"https://www.instagram.com/" + card.instagram}>
                                         <b>{card.instagram}</b>
                                     </Link>
                                 </Typography>}
                             </CardContent>
                             <CardActions>
                                 <Button size="small" color="primary">
-                                    <Link href={"https://vk.com/id" + card.id}>
+                                    <Link rel="noopener"
+                                          target="_blank"
+                                          href={"https://vk.com/id" + card.id}>
                                         В профиль
                                     </Link>
                                 </Button>

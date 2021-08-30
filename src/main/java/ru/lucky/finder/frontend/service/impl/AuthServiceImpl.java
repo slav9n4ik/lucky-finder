@@ -33,19 +33,10 @@ public class AuthServiceImpl implements AuthService {
     private final VkProvider provider;
 
     @Override
-    public String getAuthURL() {
-        return provider.getAuthorizationUri() + "?"
-                + "client_id=" + registration.getClientId()
-                + "&redirect_uri=" + registration.getRedirectUri()
-                + "&scope=" + provider.getScope()
-                + "&response_type=code";
-    }
-
-    @Override
     public void auth(String code) {
         String responseUrl = getAuthResponseURL(code);
         Map<String, String> userData = getUserData(responseUrl);
-        log.info("userData1: {}", userData);
+        log.info("userData: {}", userData);
         login(userData);
     }
 

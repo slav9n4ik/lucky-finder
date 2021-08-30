@@ -16,9 +16,6 @@ public class AuthController {
     @GetMapping("/auth-vk")
     public String vkAuth(@RequestParam(value = "code", required = false) String code) {
         log.info("AuthController, request to /auth-vk");
-        if (code == null) {
-            return "redirect:" + authService.getAuthURL();
-        }
         authService.auth(code);
         return "redirect:/";
     }
