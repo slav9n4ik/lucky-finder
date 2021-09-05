@@ -8,6 +8,7 @@ spring:
             clientSecret: '************'
             redirectUri: 'http://localhost:8080/auth-vk'
             authorizationGrantType: authorization_code
+            scope: photos
         provider:
           vk:
             tokenUri: https://oauth.vk.com/access_token

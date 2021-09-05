@@ -35,6 +35,7 @@ export default function CardsContainer() {
     const currentProfiles = useSelector(state => state.currentProfiles);
     const initData = useSelector(state => state.initData);
 
+    console.log(currentProfiles)
     return(
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
@@ -43,7 +44,7 @@ export default function CardsContainer() {
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image={card.photos[0].url}
+                                image={card['photo_200_orig']}
                                 title={card.first_name + " " + card.last_name}
                             />
                             <CardContent className={classes.cardContent}>

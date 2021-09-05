@@ -25,8 +25,8 @@ public class ProfileDto {
     private Counters counters;
     @JsonProperty("has_photo")
     private Integer hasPhoto;
-    @JsonProperty("photos")
-    private List<Photos> photos;
+    @JsonProperty("photo_200_orig")
+    private String photo;
     @JsonProperty("relation_partner")
     private RelationPartner relationPartner;
     @JsonProperty("relatives")
